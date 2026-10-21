@@ -1,0 +1,12 @@
+{
+  "name": "alibaba-sourcing-agent",
+  "owner": { "name": "artem6654" },
+  "plugins": [
+    {
+      "name": "alibaba-sourcing",
+      "source": "./",
+      "description": "Find Alibaba manufacturers, request and negotiate EXW quotes, track everything in Excel.",
+      "version": "1.0.0"
+    }
+  ]
+}
