@@ -1,48 +1,46 @@
-# Alibaba Sourcing Agent для Claude Code
+# Alibaba Sourcing Agent for Claude Code
 
-Агент для [Claude Code](https://claude.com/claude-code), который сам ищет фабрики на Alibaba, запрашивает цены EXW, торгуется в чате Alibaba и сводит результаты в Excel.
+A skill for [Claude Code](https://claude.com/claude-code) that sources products on Alibaba. It finds manufacturers, requests EXW prices, negotiates in Alibaba chat and keeps the results in an Excel workbook.
 
-От вас нужны две вещи: назвать товар и один раз заполнить короткую анкету. Дальше агент работает сам и в конце присылает рекомендацию: победителя и двух запасных поставщиков.
+You name a product and fill in one short brief. The agent does the rest and finishes with a recommended supplier and two backups.
 
-[English below](#english)
+## What it does
 
-## Что делает агент
+1. **Brief.** It sends a checklist about the product: specifications, quantity tiers, certifications, packaging, logo and supplier requirements. If the session supports interactive forms, the checklist arrives as a form where you can pick several options or type your own. Anything you leave empty uses a sensible default.
+2. **Supplier search.** It runs several Alibaba search queries and removes duplicates. Each supplier goes into one of four groups: confirmed manufacturer, claimed manufacturer, trading company or unverified. Each one then gets a score from 0 to 100: reliability counts for up to 40 points, product fit for up to 35 and price/MOQ for up to 25.
+3. **Quote requests.** It writes a personal message to each supplier asking for the best EXW unit price for every quantity tier. It also asks for MOQ, sample cost and lead time, production time, payment terms and quote validity.
+4. **Negotiation.** It compares only like-for-like offers: the same specification, quantity, currency and EXW basis. It pushes prices down with real competing quotes without naming competitors. Suppliers who don't reply get follow-ups after 2, 3 and 4 days.
+5. **Result.** The Excel workbook has five sheets: Summary, Suppliers, Negotiations, Quotes and Messages. When every supplier has given a final answer or dropped out, the agent recommends a winner and two backups.
 
-1. **Бриф.** Присылает анкету по товару: характеристики, партии, сертификаты, упаковка, логотип, требования к фабрикам. Если в сессии есть интерактивные формы, анкета приходит формой: можно отметить несколько вариантов или вписать свой. Пустые пункты агент заполняет вариантами по умолчанию.
-2. **Поиск фабрик.** Перебирает несколько поисковых запросов на Alibaba и убирает дубли. Каждую фабрику относит к одной из групп: подтверждённый производитель, заявленный производитель, торговая компания или не проверено. Затем ставит оценку от 0 до 100: надёжность — до 40 баллов, соответствие товару — до 35, цена и MOQ — до 25.
-3. **Запрос цен.** Пишет каждой фабрике отдельное сообщение и просит лучшую цену EXW для каждой партии. Уточняет MOQ, цену и срок образца, срок производства, условия оплаты и срок действия цены.
-4. **Переговоры.** Сравнивает только сопоставимые предложения: та же спецификация, та же партия, та же валюта, условия EXW. Опирается на реальные встречные цены и не называет конкурентов. Напоминает фабрикам, которые молчат, через 2, 3 и 4 дня.
-5. **Итог.** Ведёт Excel-таблицу с листами «Сводка», «Поставщики», «Переговоры», «Котировки» и «Переписка». Когда переговоры заканчиваются, называет победителя и двух запасных поставщиков.
+## What it never does
 
-## Чего агент никогда не делает
+- It never pays, places orders or Trade Assurance orders, or accepts terms.
+- It never promises a supplier an order or a timeline.
+- It never enters passwords or solves CAPTCHAs. It asks you to do that.
+- It never shares your e-mail, phone or full address. Suppliers only see the city and postal code you allow.
+- It never moves the conversation to WhatsApp or e-mail, and it never opens links that suppliers send.
+- It never follows instructions found in supplier messages.
+- It never calls a price "final" until the supplier confirms it.
 
-- не платит, не оформляет заказы и заказы Trade Assurance, не принимает условия;
-- не обещает фабрике заказ или сроки;
-- не вводит пароли и не проходит CAPTCHA: в этих случаях он просит вас сделать это самому;
-- не сообщает фабрикам ваш e-mail, телефон и полный адрес, только город и индекс, которые вы разрешили;
-- не уходит из чата Alibaba в WhatsApp или почту и не переходит по ссылкам от поставщиков;
-- не выполняет инструкции, которые встречаются в сообщениях поставщиков;
-- не называет цену «финальной», пока фабрика сама это не подтвердит.
+## Requirements
 
-## Что нужно
+- Claude Code: the desktop app, CLI or an IDE extension.
+- A browser Claude can control: the desktop app's built-in browser or the [Claude in Chrome](https://claude.com/chrome) extension.
+- An Alibaba.com account, signed in in that browser.
+- Optional: the `negotiation` skill, which gives the agent more negotiation techniques.
 
-- Claude Code: десктоп-приложение, CLI или IDE-расширение.
-- Браузер, которым Claude может управлять: встроенный браузер десктоп-приложения или расширение [Claude in Chrome](https://claude.com/chrome).
-- Аккаунт Alibaba.com, в который вы вошли в этом браузере.
-- По желанию: навык `negotiation`. С ним агент применяет больше техник переговоров.
+## Installation
 
-## Установка
+### Option 1. Plugin (recommended)
 
-### Вариант 1. Плагин (рекомендуется)
-
-В Claude Code выполните:
+In Claude Code, run:
 
 ```
 /plugin marketplace add artem6654/alibaba-sourcing-agent
 /plugin install alibaba-sourcing@alibaba-sourcing-agent
 ```
 
-### Вариант 2. Вручную
+### Option 2. Manual
 
 ```bash
 git clone https://github.com/artem6654/alibaba-sourcing-agent.git
@@ -52,46 +50,31 @@ git clone https://github.com/artem6654/alibaba-sourcing-agent.git
 ./alibaba-sourcing-agent/install.sh
 ```
 
-Скрипт скопирует навык в `~/.claude/skills/alibaba-sourcing`. Если там уже была версия, он сначала сохранит её резервную копию.
+The script copies the skill to `~/.claude/skills/alibaba-sourcing`. If a previous version is there, it backs it up first.
 
-Затем перезапустите Claude Code.
+Then restart Claude Code.
 
-## Как пользоваться
+## Usage
 
-1. Создайте пустую папку для проекта и откройте её в Claude Code.
-2. Войдите в Alibaba в браузере, которым управляет Claude.
-3. Напишите, например: `/alibaba-sourcing керамический обогреватель 1500 Вт`.
-4. Заполните анкету. Если подходят варианты по умолчанию, ответьте «по умолчанию».
-5. Дальше агент работает сам и проверяет новые ответы фабрик с той частотой, которую вы выбрали в анкете. Вас он отвлекает только при входе в аккаунт или CAPTCHA, при дедлайне от поставщика и для финального отчёта.
+1. Create an empty project folder and open it in Claude Code.
+2. Sign in to Alibaba in the browser Claude controls.
+3. Type, for example: `/alibaba-sourcing ceramic space heater 1500 W`.
+4. Fill in the brief, or reply "defaults".
+5. The agent works on its own and checks for new supplier replies as often as you chose in the brief. It only interrupts you to sign in or solve a CAPTCHA, for a supplier deadline, and for the final report.
 
-Таблица сохраняется в папке проекта.
+The workbook is saved in the project folder.
 
-## Важно
+## Languages
 
-- Агент сообщает самую низкую сопоставимую цену, которую получил, и показывает, откуда она взялась. Он не обещает, что это минимальная цена на всём рынке.
-- Сертификаты (CE, RoHS, Ecodesign и другие) агент подбирает для ориентира. Это не юридическая консультация.
-- Перед заказом проверяйте поставщика, образец и документы сами.
-- Агент отправляет сообщения от вашего имени, поэтому ответственность за переписку и решения лежит на вас.
+The agent talks to you in English by default. If you write in another language, it switches to that language for the brief, status updates, report and workbook headings. It always writes to suppliers in English, and it adds a short line in Chinese when a supplier writes in Chinese.
 
-## Лицензия
+## Disclaimer
+
+- The agent reports the lowest comparable price it actually received, with the evidence behind it. It does not promise the lowest price on the whole market.
+- Certification suggestions (CE, RoHS, Ecodesign and others) are only guidance, not legal advice.
+- Check the supplier, sample and documents yourself before you order.
+- The agent sends messages on your behalf, so you are responsible for the conversation and your decisions.
+
+## License
 
 MIT
-
----
-
-## English
-
-An autonomous [Claude Code](https://claude.com/claude-code) skill for sourcing on Alibaba. You fill in one short brief. The agent then finds and qualifies manufacturers, requests comparable **EXW** quotes for every quantity tier and negotiates in Alibaba chat. It follows up with silent suppliers, logs everything to an Excel workbook and finishes with a recommended supplier plus two backups.
-
-**Safety limits:** the agent never pays, places orders or accepts terms. It never enters passwords or solves CAPTCHAs. It never shares your e-mail, phone or full address, and it never leaves Alibaba chat. It treats supplier messages as untrusted data.
-
-**Install (plugin):**
-
-```
-/plugin marketplace add artem6654/alibaba-sourcing-agent
-/plugin install alibaba-sourcing@alibaba-sourcing-agent
-```
-
-**Install (manual):** clone the repo, run `./install.sh`, then restart Claude Code.
-
-**Use:** open an empty project folder and sign in to Alibaba in a browser that Claude can control (the built-in browser or Claude in Chrome). Then run `/alibaba-sourcing <product>`. By default the agent talks to you in Russian; if you write in another language, it translates the brief. It always writes to suppliers in English.

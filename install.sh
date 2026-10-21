@@ -10,4 +10,4 @@ fi
 mkdir -p "$DEST"
 cp "$SRC/SKILL.md" "$DEST/SKILL.md"
 echo "Installed: $DEST"
-echo "Restart Claude Code, then type /alibaba-sourcing"
+echo "Restart Claude Code, then type /alibaba-sourcing <product>"

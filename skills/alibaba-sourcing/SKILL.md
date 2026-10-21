@@ -9,11 +9,11 @@ Help the user compare real manufacturers and obtain the lowest credible EXW pric
 
 Project data is project-specific. First inspect the active project's notes, spreadsheets, and sourcing records. If it has `sourcing/projects/<slug>.json`, follow that structure and its schema; use `sourcing/rfq_templates.md` when present, and rebuild `sourcing/output/<slug>.xlsx` only when the project's build script exists. If those files are absent, use the project's existing workbook or records and follow their format. Never assume a path, overwrite a workbook, or create a second source of truth without need. Keep supplier history and quote evidence in the active project.
 
-Speak the user's language with the user (the checklist below is written in Russian; translate it if the user writes in another language) and English with suppliers; add a concise Chinese line when the supplier writes in Chinese.
+Speak English with the user by default. If the user writes in another language, switch to that language for all user-facing text (checklist, status updates, report, workbook headings). Always write to suppliers in English; add a concise Chinese line when the supplier writes in Chinese.
 
 ## Autonomy mode (default)
 
-The user wants a finished result, not questions. Ask the user exactly once: the brief checklist (see "Brief checklist"). After the user answers it, or replies «по умолчанию», run the whole project yourself to the end, with no further questions:
+The user wants a finished result, not questions. Ask the user exactly once: the brief checklist (see "Brief checklist"). After the user answers it, or replies "defaults", run the whole project yourself to the end, with no further questions:
 
 - Search and qualify suppliers yourself, then pick the shortlist and contact them without asking which ones to contact.
 - Read every reply, answer supplier questions from the brief, negotiate, follow up, and close suppliers yourself. Write each message individually for that supplier and product, keep it short and human, and use the `negotiation` skill tactics when it is installed (calibrated "what would it take…" questions, labeling, no splitting the difference).
@@ -43,35 +43,35 @@ Resume an existing project from its saved stage. Otherwise ask only for missing 
 When the user names a product and the brief is incomplete, send the checklist first. Do not search or contact suppliers until the user answers. Show the default for each item in brackets, and treat an unanswered item as its default.
 
 Format:
-- If a visual/interactive widget tool is available (for example an elicitation form), render the checklist as a form: every question with options is a multi-select group (the user may pick several options), every choice group ends with a "Свой вариант" option that reveals a free-text field, quantity tiers are multi-select pills plus a free-text field, the deadline is a date picker, and the supplier count is a slider. Add a file/link field for a sample photo, a "Всё по умолчанию" button and a submit button.
-- Otherwise send a numbered text checklist that the user can answer point by point (e.g. "1 — …, 2 — …", or «по умолчанию»), on one screen.
+- If a visual/interactive widget tool is available (for example an elicitation form), render the checklist as a form: every question with options is a multi-select group (the user may pick several options), every choice group ends with an "Other" option that reveals a free-text field, quantity tiers are multi-select pills plus a free-text field, the deadline is a date picker, and the supplier count is a slider. Add a file/link field for a sample photo, a "Use all defaults" button and a submit button.
+- Otherwise send a numbered text checklist that the user can answer point by point (e.g. "1 — …, 2 — …", or "defaults"), on one screen.
 
-**Блок А. Товар (6–10 вопросов, составь их под конкретный товар)**
-Пиши вопросы о том, что определяет цену и качество именно этого товара: размеры, материал и состав, плотность или толщину, вес, цвет, комплектацию, ключевые технические параметры, допустимые варианты. К каждому вопросу дай 2–3 типичных варианта ответа с Alibaba. Отдельной строкой попроси ссылку или фото образца, если он есть.
+**Block A. Product (6–10 questions tailored to this product)**
+Ask about what drives price and quality for this specific product: dimensions, material and composition, density or thickness, weight, color, included parts, key technical parameters, acceptable variants. Give 2–3 typical Alibaba options for each question. On a separate line, ask for a link or photo of a sample if the user has one.
 
-**Блок Б. Заказ (всегда)**
-1. Количество: одна партия или несколько уровней [500 шт.]
-2. Целевая цена EXW за шт., USD [нет — торгуемся от лучших котировок]
-3. Страна продажи — только для подбора сертификатов [ЕС]
-4. Обязательные сертификаты и документы [предложу сам по стране и товару]
-5. Упаковка: полиэтиленовый пакет / рулонная или вакуумная / цветная коробка; штрихкод [пакет, без коробки]
-6. Логотип и свой бренд (private label): на товаре, бирке, коробке [не нужен]
-7. Нужен ли образец до заказа [да, после выбора финалистов — оплачиваете вы]
-8. Когда нужен товар [не срочно]
+**Block B. Order (always)**
+1. Quantity: one batch or several tiers [500 pcs]
+2. Target EXW price per unit, USD [none — negotiate from the best quotes]
+3. Country of sale — only to choose certifications [EU]
+4. Required certifications and documents [I'll suggest them for the country and product]
+5. Packaging: poly bag / rolled or vacuum / color box; barcode [poly bag, no box]
+6. Logo and private label: on product, tag, box [not needed]
+7. Sample before ordering [yes, after finalists are chosen — paid by you]
+8. When you need the goods [not urgent]
 
-**Блок В. Отбор фабрик (всегда)**
-9. Сколько фабрик опросить [15]
-10. Только производители, без торговых компаний [да]
-11. Минимальный рейтинг и стаж на Alibaba [рейтинг 4,5+, стаж от 3 лет]
-12. Что важнее при выборе: цена, качество, надёжность фабрики [все три: рейтинг 35/35/30]
+**Block C. Supplier selection (always)**
+9. How many factories to contact [15]
+10. Manufacturers only, no trading companies [yes]
+11. Minimum Alibaba rating and years on platform [rating 4.5+, 3+ years]
+12. What matters most: price, quality, factory reliability [all three: weights 35/35/30]
 
-**Блок Г. Как я работаю (всегда)**
-13. Веду переписку и торгуюсь сам, без согласования каждого сообщения [да]
-14. Как часто проверять ответы [каждые 5 минут, пока открыта сессия]
-15. Что можно сообщать фабрикам [только город и почтовый индекс, которые вы укажете, и данные из профиля Alibaba; без e-mail, телефона и полного адреса]
-16. Где хранить таблицу [в папке проекта, файл .xlsx]
+**Block D. How I work (always)**
+13. I message and negotiate on my own, without approving each message [yes]
+14. How often to check replies [every 5 minutes while the session is open]
+15. What I may tell suppliers [only the city and postal code you give me, plus your Alibaba profile data; no e-mail, phone or full address]
+16. Where to keep the workbook [in the project folder, .xlsx]
 
-Для текстового чеклиста закончи одной строкой: «Ответьте номерами, например "1 — 60×40 см, 9 — 10". Всё, что не укажете, беру по умолчанию».
+For the text checklist, end with one line: "Reply by number, e.g. "1 — 60×40 cm, 9 — 10". Anything you skip uses the default."
 
 ### 2. Find and qualify suppliers
 
@@ -117,6 +117,6 @@ Mark a project `done` when every contacted supplier is in a terminal status: `fi
 
 ## Excel and data quality
 
-The workbook contains `Сводка`, `Поставщики`, `Переговоры`, `Котировки`, and `Переписка`. The summary must show observed low comparable EXW offers by quantity and currency, identify whether each is supplier-confirmed final, and avoid calling unmatched quotes the overall minimum. Keep links to source listings and preserve quote/message history.
+The workbook contains `Summary`, `Suppliers`, `Negotiations`, `Quotes`, and `Messages` (translate the sheet names if the user works in another language). The summary must show observed low comparable EXW offers by quantity and currency, identify whether each is supplier-confirmed final, and avoid calling unmatched quotes the overall minimum. Keep links to source listings and preserve quote/message history.
 
 Use actual observed data only. Unknown values remain blank or explicitly unknown. Never use example schema data as live supplier research. Flag battery/nicotine-related certifications and import requirements for the destination when relevant, without presenting the flags as legal advice.
