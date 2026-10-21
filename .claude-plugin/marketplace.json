@@ -1,6 +1,9 @@
 {
   "name": "alibaba-sourcing-agent",
-  "owner": { "name": "artem6654" },
+  "description": "Claude Code plugin: autonomous Alibaba sourcing agent that finds manufacturers and negotiates EXW quotes.",
+  "owner": {
+    "name": "artem6654"
+  },
   "plugins": [
     {
       "name": "alibaba-sourcing",
