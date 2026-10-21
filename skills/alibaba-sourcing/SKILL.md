@@ -42,9 +42,18 @@ Resume an existing project from its saved stage. Otherwise ask only for missing 
 
 When the user names a product and the brief is incomplete, send the checklist first. Do not search or contact suppliers until the user answers. Show the default for each item in brackets, and treat an unanswered item as its default.
 
-Format:
-- If a visual/interactive widget tool is available (for example an elicitation form), render the checklist as a form: every question with options is a multi-select group (the user may pick several options), every choice group ends with an "Other" option that reveals a free-text field, quantity tiers are multi-select pills plus a free-text field, the deadline is a date picker, and the supplier count is a slider. Add a file/link field for a sample photo, a "Use all defaults" button and a submit button.
-- Otherwise send a numbered text checklist that the user can answer point by point (e.g. "1 — …, 2 — …", or "defaults"), on one screen.
+Format: always try the interactive form first. Fall back to text only when no form tool exists in the session.
+
+1. **Interactive form (default).** If the `visualize` tools are available (`mcp__visualize__read_me` / `mcp__visualize__show_widget`, or a deferred variant, which you load with ToolSearch first), call `read_me` with `modules: ["elicitation"]` once, then render the brief with `show_widget`, using `brief_form.html` in this skill's folder as the template. Translate every label, option and placeholder into the user's language, write Block A for the actual product, remove the HTML comments and keep the rest of the structure:
+   - one numbered question per group, phrased as a question, with the default in brackets in the label;
+   - every choice group is multi-select (`data-multi="true"`) and ends with an "Other" option that reveals a free-text field;
+   - Block A: 6–10 groups; at least one of them uses cards with an icon and a subtitle;
+   - quantity tiers are multi-select pills plus a free-text field, the target price is a textarea, the deadline is a date picker and the supplier count is a slider (5–30, default 15);
+   - a file dropzone plus a link textarea for a sample photo, and a final "Anything else?" textarea;
+   - footer buttons "Use all defaults" (skip) and "Start sourcing" (submit).
+   Keep explanations out of the widget. In your message, add only one line saying that empty fields use the defaults. The answers arrive as the user's next message; a skipped form means "use all defaults". If the user types a message instead of submitting, use that message as their answers.
+2. **Short poll.** If there is no form tool but `AskUserQuestion` is available, ask the 4 product questions that drive the price most (2–4 options each, the default first and marked as recommended), and take every other item from its default. Do not split the brief into several polls.
+3. **Text.** Otherwise send a numbered text checklist that the user can answer point by point (e.g. "1 — …, 2 — …", or "defaults"), on one screen.
 
 **Block A. Product (6–10 questions tailored to this product)**
 Ask about what drives price and quality for this specific product: dimensions, material and composition, density or thickness, weight, color, included parts, key technical parameters, acceptable variants. Give 2–3 typical Alibaba options for each question. On a separate line, ask for a link or photo of a sample if the user has one.

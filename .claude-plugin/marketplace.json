@@ -9,7 +9,7 @@
       "name": "alibaba-sourcing",
       "source": "./",
       "description": "Find Alibaba manufacturers, request and negotiate EXW quotes, track everything in Excel.",
-      "version": "1.1.0"
+      "version": "1.2.0"
     }
   ]
 }

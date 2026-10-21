@@ -1,6 +1,6 @@
 {
   "name": "alibaba-sourcing",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Autonomous Alibaba sourcing agent for Claude Code: finds and qualifies manufacturers, requests and negotiates comparable EXW quotes in Alibaba chat, tracks conversations and exports results to Excel.",
   "author": {
     "name": "artem6654"

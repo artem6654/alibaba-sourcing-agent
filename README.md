@@ -6,7 +6,7 @@ You name a product and fill in one short brief. The agent does the rest and fini
 
 ## What it does
 
-1. **Brief.** It sends a checklist about the product: specifications, quantity tiers, certifications, packaging, logo and supplier requirements. If the session supports interactive forms, the checklist arrives as a form where you can pick several options or type your own. Anything you leave empty uses a sensible default.
+1. **Brief.** It sends a checklist about the product: specifications, quantity tiers, certifications, packaging, logo and supplier requirements. In the Claude desktop app the checklist arrives as an interactive form (template: `skills/alibaba-sourcing/brief_form.html`): every question allows several answers and a custom one, quantities are multi-select, the deadline is a date picker and the factory count is a slider. Without a form tool it falls back to a short poll or a numbered text list. Anything you leave empty uses a sensible default.
 2. **Supplier search.** It runs several Alibaba search queries and removes duplicates. Each supplier goes into one of four groups: confirmed manufacturer, claimed manufacturer, trading company or unverified. Each one then gets a score from 0 to 100: reliability counts for up to 40 points, product fit for up to 35 and price/MOQ for up to 25.
 3. **Quote requests.** It writes a personal message to each supplier asking for the best EXW unit price for every quantity tier. It also asks for MOQ, sample cost and lead time, production time, payment terms and quote validity.
 4. **Negotiation.** It compares only like-for-like offers: the same specification, quantity, currency and EXW basis. It pushes prices down with real competing quotes without naming competitors. Suppliers who don't reply get follow-ups after 2, 3 and 4 days.
@@ -50,7 +50,7 @@ git clone https://github.com/artem6654/alibaba-sourcing-agent.git
 ./alibaba-sourcing-agent/install.sh
 ```
 
-The script copies the skill to `~/.claude/skills/alibaba-sourcing`. If a previous version is there, it backs it up first.
+The script copies the skill to `~/.claude/skills/alibaba-sourcing`. If a previous version is there, it first backs it up to `~/.claude/skill-backups/`.
 
 Then restart Claude Code.
 
