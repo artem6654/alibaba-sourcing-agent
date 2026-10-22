@@ -15,6 +15,10 @@ You name a product and fill in one short brief. The agent does the rest and fini
 
 The Excel workbook has six sheets: Summary, Suppliers, Negotiations, Quotes, Messages and WeChat QR.
 
+## How it writes to suppliers
+
+Messages read like a real buyer chatting: friendly and relaxed, 2–4 short sentences, no formatting. They avoid typical machine phrases such as "I hope this message finds you well" or "Certainly!". Each message mentions something specific about that supplier's product or reply, so no two suppliers get the same text. The agent uses only facts from your brief and never invents a company or past orders. If a supplier asks whether they are talking to a bot, the agent leaves that question unanswered and carries on with the business part. It never claims to be a human.
+
 ## What it never does
 
 - It never pays, places orders or Trade Assurance orders, or accepts terms.
