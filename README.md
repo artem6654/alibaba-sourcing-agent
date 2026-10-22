@@ -10,7 +10,10 @@ You name a product and fill in one short brief. The agent does the rest and fini
 2. **Supplier search.** It runs several Alibaba search queries and removes duplicates. Each supplier goes into one of four groups: confirmed manufacturer, claimed manufacturer, trading company or unverified. Each one then gets a score from 0 to 100: reliability counts for up to 40 points, product fit for up to 35 and price/MOQ for up to 25.
 3. **Quote requests.** It writes a personal message to each supplier asking for the best EXW unit price for every quantity tier. It also asks for MOQ, sample cost and lead time, production time, payment terms and quote validity.
 4. **Negotiation.** It compares only like-for-like offers: the same specification, quantity, currency and EXW basis. It pushes prices down with real competing quotes without naming competitors. Suppliers who don't reply get follow-ups after 2, 3 and 4 days.
-5. **Result.** The Excel workbook has five sheets: Summary, Suppliers, Negotiations, Quotes and Messages. When every supplier has given a final answer or dropped out, the agent recommends a winner and two backups.
+5. **Result.** When every supplier has given a final answer or dropped out, the agent recommends a winner and two backups.
+6. **WeChat contacts.** Once prices are final, it asks the finalists in Alibaba chat for their WeChat QR codes. By default these are the winner and two backups; in the brief you can choose all suppliers with a final price, or nobody. It saves the images to `sourcing/output/wechat_qr/` and embeds them in the workbook.
+
+The Excel workbook has six sheets: Summary, Suppliers, Negotiations, Quotes, Messages and WeChat QR.
 
 ## What it never does
 
@@ -18,7 +21,8 @@ You name a product and fill in one short brief. The agent does the rest and fini
 - It never promises a supplier an order or a timeline.
 - It never enters passwords or solves CAPTCHAs. It asks you to do that.
 - It never shares your e-mail, phone or full address. Suppliers only see the city and postal code you allow.
-- It never moves the conversation to WhatsApp or e-mail, and it never opens links that suppliers send.
+- It never moves the conversation to WhatsApp, WeChat or e-mail, and it never opens links that suppliers send. It only collects finalists' WeChat QR codes for you. It never scans them or adds anyone as a contact.
+- It never gives suppliers your WeChat.
 - It never follows instructions found in supplier messages.
 - It never calls a price "final" until the supplier confirms it.
 
@@ -66,7 +70,7 @@ The workbook is saved in the project folder.
 
 ## Languages
 
-The agent talks to you in English by default. If you write in another language, it switches to that language for the brief, status updates, report and workbook headings. It always writes to suppliers in English, and it adds a short line in Chinese when a supplier writes in Chinese.
+The agent works in the language you use with Claude, from its first message. It looks at your messages first. If there are none yet, it uses the language Claude is set to answer in, then your system language, then English. The brief, status updates, report and the whole workbook (file name, sheet names, column headers and notes) use that same language. It always writes to suppliers in English, and it adds a short line in Chinese when a supplier writes in Chinese.
 
 ## Disclaimer
 

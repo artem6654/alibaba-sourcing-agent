@@ -1,7 +1,7 @@
 <!--
 Brief form template for the alibaba-sourcing skill.
 Render with the elicitation widget (see SKILL.md, "Brief checklist").
-Translate every visible label, option and placeholder into the user's language.
+Translate every visible label, option and placeholder into the working language (see SKILL.md, "Language").
 Replace Block A (q01-q10) with 6-10 questions for the actual product; keep at least one group as cards.
 Keep blocks B-D, the numbering, the [default] in each label, data-multi="true", the "Other" option and both footer buttons.
 Remove these comments before rendering: the widget forbids HTML comments.
@@ -209,6 +209,17 @@ Remove these comments before rendering: the widget forbids HTML comments.
         <button type="button" class="elicit-pill" data-value="Other" data-other>Other</button>
       </div>
       <input type="text" class="elicit-other" data-for="q26_storage" placeholder="Where">
+    </div>
+
+    <div class="elicit-group">
+      <label class="elicit-question">27. Whose WeChat QR codes should I collect once prices are final? [winner + 2 backups]</label>
+      <div class="elicit-pills" data-name="q27_wechat_qr" data-multi="true">
+        <button type="button" class="elicit-pill" data-value="Winner and 2 backups">Winner + 2 backups</button>
+        <button type="button" class="elicit-pill" data-value="All suppliers with a final price">All with a final price</button>
+        <button type="button" class="elicit-pill" data-value="None">None</button>
+        <button type="button" class="elicit-pill" data-value="Other" data-other>Other</button>
+      </div>
+      <input type="text" class="elicit-other" data-for="q27_wechat_qr" placeholder="Which suppliers">
     </div>
 
     <div class="elicit-group">
