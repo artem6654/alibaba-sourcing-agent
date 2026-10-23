@@ -58,7 +58,7 @@ git clone https://github.com/artem6654/alibaba-sourcing-agent.git
 ./alibaba-sourcing-agent/install.sh
 ```
 
-The script copies the skill to `~/.claude/skills/alibaba-sourcing`. If a previous version is there, it first backs it up to `~/.claude/skill-backups/`.
+The script copies the skill to `~/.claude/skills/alibaba-sourcing`. If a previous version is there, it first backs it up to `~/.claude/skill-backups/` and deletes older backups, so only the latest one is kept. To keep more, run `KEEP_BACKUPS=3 ./install.sh`; `KEEP_BACKUPS=0` keeps none.
 
 Then restart Claude Code.
 
