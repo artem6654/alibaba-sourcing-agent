@@ -11,9 +11,10 @@ You name a product and fill in one short brief. The agent does the rest and fini
 3. **Quote requests.** It writes a personal message to each supplier asking for the best EXW unit price for every quantity tier. It also asks for MOQ, sample cost and lead time, production time, payment terms and quote validity.
 4. **Negotiation.** It compares only like-for-like offers: the same specification, quantity, currency and EXW basis. It pushes prices down with real competing quotes without naming competitors. Suppliers who don't reply get follow-ups after 2, 3 and 4 days.
 5. **Result.** When every supplier has given a final answer or dropped out, the agent recommends a winner and two backups.
-6. **WeChat contacts.** Once prices are final, it asks the finalists in the platform chat for their WeChat QR codes. By default these are the winner and two backups; in the brief you can choose all suppliers with a final price, or nobody. It saves the images to `sourcing/output/wechat_qr/` and embeds them in the workbook.
+6. **Finalist verification.** It asks the winner and two backups for their business license, test reports (for example CE and RoHS) and photos or video of the production line. It checks that the company name, models and standards match, and looks up report numbers on the official websites of the labs that issued them. Where a CAPTCHA blocks the check, it hands the details to you. If the winner shows a red flag, the next backup moves up.
+7. **WeChat contacts.** Once prices are final, it asks the finalists in the platform chat for their WeChat QR codes. By default these are the winner and two backups; in the brief you can choose all suppliers with a final price, or nobody. It saves the images to `sourcing/output/wechat_qr/` and embeds them in the workbook.
 
-The Excel workbook has six sheets: Summary, Suppliers, Negotiations, Quotes, Messages and WeChat QR. Every sheet has a Platform column.
+The Excel workbook has seven sheets: Summary, Suppliers, Negotiations, Quotes, Messages, Verification and WeChat QR. Every sheet has a Platform column.
 
 ## Several projects at once
 
@@ -27,6 +28,40 @@ Each product is a separate project: its own folder, its own Claude session and i
 - **Checklists.** Each project folder has `brief.md` with your brief answers and `checklist.md` with progress checkboxes and the next action. A resumed session continues from the first unchecked step.
 
 You can change the shared folder by setting the `SOURCING_HOME` environment variable; by default it is `~/Sourcing`.
+
+## Dashboard
+
+`~/Sourcing/dashboard.html` shows all projects on one page and refreshes itself every minute. At the top is what needs you (sign-in, CAPTCHA, deadlines, red flags) and which quotes expire within 3 days. Below that, each project has its stage, supplier counts, best price per quantity tier, the suppliers it is waiting for, verification results and the next action. Each project updates the page after every check. To rebuild it by hand:
+
+```bash
+python3 ~/.claude/skills/alibaba-sourcing/scripts/dashboard.py
+```
+
+## Phone notifications
+
+The agent alerts you about a final price, a quote that expires within 2 days, a needed sign-in or CAPTCHA, a supplier deadline, a red flag on the winner, and a finished project. Each alert is sent only once.
+
+- **Claude app.** If Remote Control is connected, Claude's own notifications reach your phone.
+- **ntfy (simplest, free).** Install the [ntfy](https://ntfy.sh) app, subscribe to a long random topic name that only you know, and create `~/Sourcing/_shared/notify.json`:
+
+  ```json
+  {"ntfy": {"topic": "your-long-random-topic"}}
+  ```
+
+  Anyone who knows the topic name can read the alerts, so keep it secret.
+- **Telegram.** Create a bot with @BotFather, send it any message, find your chat id, and add it to the same file:
+
+  ```json
+  {"telegram": {"bot_token": "123456:ABC...", "chat_id": "123456789"}}
+  ```
+
+- **macOS.** Alerts also show up as Mac notifications. To turn that off, add `"macos": false`.
+
+Fill this file in yourself; the agent never writes tokens. To test it:
+
+```bash
+python3 ~/.claude/skills/alibaba-sourcing/scripts/notify.py "Test alert"
+```
 
 ## How it writes to suppliers
 

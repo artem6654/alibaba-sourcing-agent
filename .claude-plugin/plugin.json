@@ -1,6 +1,6 @@
 {
   "name": "alibaba-sourcing",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Autonomous sourcing agent for Claude Code on Alibaba and Made-in-China: finds manufacturers, negotiates comparable EXW quotes, runs several projects in parallel from one account, exports results to Excel.",
   "author": {
     "name": "artem6654"
