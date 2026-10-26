@@ -1,7 +1,7 @@
 {
   "name": "alibaba-sourcing",
-  "version": "1.4.0",
-  "description": "Autonomous Alibaba sourcing agent for Claude Code: finds and qualifies manufacturers, requests and negotiates comparable EXW quotes in Alibaba chat, tracks conversations and exports results to Excel.",
+  "version": "1.5.0",
+  "description": "Autonomous sourcing agent for Claude Code on Alibaba and Made-in-China: finds manufacturers, negotiates comparable EXW quotes, runs several projects in parallel from one account, exports results to Excel.",
   "author": {
     "name": "artem6654"
   },
@@ -15,6 +15,8 @@
     "negotiation",
     "rfq",
     "exw",
-    "suppliers"
+    "suppliers",
+    "made-in-china",
+    "parallel"
   ]
 }

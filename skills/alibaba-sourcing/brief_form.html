@@ -134,13 +134,21 @@ Remove these comments before rendering: the widget forbids HTML comments.
 
 <!-- Block C: supplier selection -->
     <div class="elicit-group">
-      <label class="elicit-question">19. How many factories should I contact? [15]</label>
+      <label class="elicit-question">19. Which platforms should I search? [both]</label>
+      <div class="elicit-pills" data-name="q19a_platforms" data-multi="true">
+        <button type="button" class="elicit-pill" data-value="Alibaba" style="border-radius:12px; padding:14px 16px; display:flex; gap:12px; align-items:flex-start; text-align:left; min-width:180px; box-shadow:0 1px 2px rgba(0,0,0,0.04)"><i class="ti ti-world" style="font-size:20px" aria-hidden="true"></i><span><span style="font-size:13px; font-weight:500">Alibaba.com</span><br><span style="font-size:11px; color:var(--text-muted)">Largest choice, Trade Assurance</span></span></button>
+        <button type="button" class="elicit-pill" data-value="Made-in-China" style="border-radius:12px; padding:14px 16px; display:flex; gap:12px; align-items:flex-start; text-align:left; min-width:180px; box-shadow:0 1px 2px rgba(0,0,0,0.04)"><i class="ti ti-building-factory-2" style="font-size:20px" aria-hidden="true"></i><span><span style="font-size:13px; font-weight:500">Made-in-China.com</span><br><span style="font-size:11px; color:var(--text-muted)">Many audited factories</span></span></button>
+      </div>
+    </div>
+
+    <div class="elicit-group">
+      <label class="elicit-question">20. How many factories should I contact? [15]</label>
       <input type="range" data-name="q19_factories" min="5" max="30" step="1" value="15">
       <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-muted)"><span>5</span><span>30</span></div>
     </div>
 
     <div class="elicit-group">
-      <label class="elicit-question">20. Which suppliers? [manufacturers only]</label>
+      <label class="elicit-question">21. Which suppliers? [manufacturers only]</label>
       <div class="elicit-pills" data-name="q20_supplier_type" data-multi="true">
         <button type="button" class="elicit-pill" data-value="Manufacturers">Manufacturers</button>
         <button type="button" class="elicit-pill" data-value="Trading companies">Trading companies</button>
@@ -148,7 +156,7 @@ Remove these comments before rendering: the widget forbids HTML comments.
     </div>
 
     <div class="elicit-group">
-      <label class="elicit-question">21. Rating and years on Alibaba? [4.5+, 3+ years]</label>
+      <label class="elicit-question">22. Minimum rating and years on the platform? [4.5+, 3+ years; Made-in-China: audited supplier]</label>
       <div class="elicit-pills" data-name="q21_rating" data-multi="true">
         <button type="button" class="elicit-pill" data-value="Rating 4.5+">Rating 4.5+</button>
         <button type="button" class="elicit-pill" data-value="3+ years">3+ years</button>
@@ -160,7 +168,7 @@ Remove these comments before rendering: the widget forbids HTML comments.
     </div>
 
     <div class="elicit-group">
-      <label class="elicit-question">22. What matters most? [all three: 35/35/30]</label>
+      <label class="elicit-question">23. What matters most? [all three: 35/35/30]</label>
       <div class="elicit-pills" data-name="q22_priority" data-multi="true">
         <button type="button" class="elicit-pill" data-value="Price">Price</button>
         <button type="button" class="elicit-pill" data-value="Quality">Quality</button>
@@ -171,7 +179,7 @@ Remove these comments before rendering: the widget forbids HTML comments.
 
 <!-- Block D: how I work -->
     <div class="elicit-group">
-      <label class="elicit-question">23. How should I handle messages? [on my own, no approval]</label>
+      <label class="elicit-question">24. How should I handle messages? [on my own, no approval]</label>
       <div class="elicit-pills" data-name="q23_autonomy" data-multi="true">
         <button type="button" class="elicit-pill" data-value="On my own, no approval">On my own, no approval</button>
         <button type="button" class="elicit-pill" data-value="Approve the first message">Approve the first message</button>
@@ -180,7 +188,7 @@ Remove these comments before rendering: the widget forbids HTML comments.
     </div>
 
     <div class="elicit-group">
-      <label class="elicit-question">24. How often should I check replies? [every 5 minutes while the session is open]</label>
+      <label class="elicit-question">25. How often should I check replies? [every 5 minutes while the session is open]</label>
       <div class="elicit-pills" data-name="q24_cadence" data-multi="true">
         <button type="button" class="elicit-pill" data-value="Every 5 minutes">Every 5 minutes</button>
         <button type="button" class="elicit-pill" data-value="Every 15 minutes">Every 15 minutes</button>
@@ -191,7 +199,7 @@ Remove these comments before rendering: the widget forbids HTML comments.
     </div>
 
     <div class="elicit-group">
-      <label class="elicit-question">25. What may I tell suppliers? [only city and postal code + Alibaba profile data]</label>
+      <label class="elicit-question">26. What may I tell suppliers? [only city and postal code + Alibaba profile data]</label>
       <div class="elicit-pills" data-name="q25_disclosure" data-multi="true">
         <button type="button" class="elicit-pill" data-value="City and postal code">City and postal code</button>
         <button type="button" class="elicit-pill" data-value="Alibaba profile data">Alibaba profile data</button>
@@ -202,7 +210,7 @@ Remove these comments before rendering: the widget forbids HTML comments.
     </div>
 
     <div class="elicit-group">
-      <label class="elicit-question">26. Where should I keep the workbook? [project folder, .xlsx]</label>
+      <label class="elicit-question">27. Where should I keep the workbook? [project folder, .xlsx]</label>
       <div class="elicit-pills" data-name="q26_storage" data-multi="true">
         <button type="button" class="elicit-pill" data-value="Project folder, .xlsx">Project folder, .xlsx</button>
         <button type="button" class="elicit-pill" data-value="Online summary page">Online summary page</button>
@@ -212,7 +220,7 @@ Remove these comments before rendering: the widget forbids HTML comments.
     </div>
 
     <div class="elicit-group">
-      <label class="elicit-question">27. Whose WeChat QR codes should I collect once prices are final? [winner + 2 backups]</label>
+      <label class="elicit-question">28. Whose WeChat QR codes should I collect once prices are final? [winner + 2 backups]</label>
       <div class="elicit-pills" data-name="q27_wechat_qr" data-multi="true">
         <button type="button" class="elicit-pill" data-value="Winner and 2 backups">Winner + 2 backups</button>
         <button type="button" class="elicit-pill" data-value="All suppliers with a final price">All with a final price</button>

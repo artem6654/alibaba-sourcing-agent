@@ -23,6 +23,6 @@ if [ -d "$BACKUP_DIR" ]; then
 fi
 rm -rf -- "$DEST"
 mkdir -p "$DEST"
-cp "$SRC"/* "$DEST/"
+cp -R "$SRC"/. "$DEST/"
 echo "Installed: $DEST"
 echo "Restart Claude Code, then type /alibaba-sourcing <product>"
