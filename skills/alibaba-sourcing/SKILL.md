@@ -115,7 +115,7 @@ How:
 1. If a push notification tool is available in the session (for example `PushNotification`), use it. It reaches the phone only when Remote Control is connected.
 2. Also run `python3 scripts/notify.py "<message>" --project <slug> --key <unique-key>`. It sends to the channels the user set up in `_shared/notify.json` (ntfy app, Telegram bot, macOS notification). Use a stable `--key` per event (for example `final:<platform>:<supplier>`, `expiry:<supplier>:<tier>:<date>`, `captcha:<date-hour>`), so the same alert is never sent twice. Use `--priority high` for login/CAPTCHA and deadlines.
 3. Keep alerts under 200 characters, one line, in the working language; lead with what to do ("CAPTCHA on Alibaba — please sign in", "Ningbo X: final 12.4 USD EXW @500, valid to 5 Nov").
-4. Never put the user's contacts, passwords or tokens in an alert. Never create or edit `notify.json` with tokens yourself: if the user wants phone alerts and the file is missing, tell them once how to set it up (see README) and continue.
+4. Never put the user's contacts, passwords or tokens in an alert. Never create or edit `notify.json` with tokens yourself: if the user wants phone alerts and the file is missing, tell them once how to set it up (see README; for Telegram, `scripts/telegram_setup.py` fills in the chat id after the user adds the token) and continue.
 
 ## Supplier message style
 

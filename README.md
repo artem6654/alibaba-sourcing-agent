@@ -49,11 +49,22 @@ The agent alerts you about a final price, a quote that expires within 2 days, a 
   ```
 
   Anyone who knows the topic name can read the alerts, so keep it secret.
-- **Telegram.** Create a bot with @BotFather, send it any message, find your chat id, and add it to the same file:
+- **Telegram.**
+  1. In Telegram, open @BotFather, send `/newbot`, choose a name and a username ending in `bot`, and copy the token it gives you.
+  2. Put the token into `~/Sourcing/_shared/notify.json`:
 
-  ```json
-  {"telegram": {"bot_token": "123456:ABC...", "chat_id": "123456789"}}
-  ```
+     ```json
+     {"telegram": {"bot_token": "123456:ABC..."}}
+     ```
+
+  3. Open your new bot in Telegram and press **Start**.
+  4. Run the setup script. It finds your chat id, saves it to the file (readable only by you) and sends a test message:
+
+     ```bash
+     python3 ~/.claude/skills/alibaba-sourcing/scripts/telegram_setup.py
+     ```
+
+  Treat the token like a password: anyone who has it can send messages as your bot. If it leaks, run `/revoke` in @BotFather.
 
 - **macOS.** Alerts also show up as Mac notifications. To turn that off, add `"macos": false`.
 
